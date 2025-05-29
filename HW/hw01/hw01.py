@@ -15,7 +15,7 @@ def a_plus_abs_b(a, b):
     if b < 0:
         f = a-b
     else:
-        f = _____
+        f = a+b
     return f(a, b)
 
 def a_plus_abs_b_syntax_check():
