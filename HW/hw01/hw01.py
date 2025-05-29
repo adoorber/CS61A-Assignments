@@ -13,7 +13,7 @@ def a_plus_abs_b(a, b):
     3
     """
     if b < 0:
-        f = _____
+        f = a-b
     else:
         f = _____
     return f(a, b)
