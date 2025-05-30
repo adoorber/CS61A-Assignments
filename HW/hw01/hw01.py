@@ -13,10 +13,10 @@ def a_plus_abs_b(a, b):
     3
     """
     if b < 0:
-        f = a-b
+        f = lambda x, y: x - y  # 修改这一行，返回一个函数
     else:
-        f = a+b
-    return f(a, b)
+        f = lambda x, y: x + y  # 修改这一行，返回一个函数
+    return f(a, b)  # 正确调用函数
 
 def a_plus_abs_b_syntax_check():
     """Check that you didn't change the return statement of a_plus_abs_b.
