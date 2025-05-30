@@ -42,7 +42,7 @@ def two_of_three(i, j, k):
     >>> two_of_three(5, 5, 5)
     50
     """
-    return _____
+    return i*i+j*j+k*k-max(i,j,k)*max(i,j,k)
 
 def two_of_three_syntax_check():
     """Check that your two_of_three code consists of nothing but a return statement.
@@ -66,7 +66,23 @@ def largest_factor(n):
     1
     """
     "*** YOUR CODE HERE ***"
+    # a=1
+    # c=n
+    # while a*a<=c :
+    #     if c%a==0:
+    #         b=a
+    # return b
 
+    if n <= 1:
+        return n  # 处理特殊情况
+    
+    largest = 1
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            # 同时检查因子i和对应的商n//i
+            largest = max(largest, i, n // i)
+    
+    return largest if largest != n else 1  # 若n是质数，返回1
 
 def hailstone(n):
     """Print the hailstone sequence starting at n and return its
@@ -88,4 +104,15 @@ def hailstone(n):
     1
     """
     "*** YOUR CODE HERE ***"
-
+    a=1
+    b=n
+    print(b)
+    while b!=1:
+        if b%2==0:
+            b=b//2
+            print(b)
+        else:
+            b=b*3+1
+            print(b)
+        a=a+1
+    return a
