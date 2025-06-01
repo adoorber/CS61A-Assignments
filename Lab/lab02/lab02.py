@@ -14,6 +14,7 @@ def composite_identity(f, g):
     False
     """
     "*** YOUR CODE HERE ***"
+    return lambda x: f(g(x)) == g(f(x))
 
 
 def sum_digits(y):
@@ -60,6 +61,15 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
+    def f(n):
+        i = 1
+        count = 0
+        while i <= n:
+            if condition(n,i):
+                count += 1
+            i += 1
+        return count
+    return f
 
 
 def multiple(a, b):
@@ -71,7 +81,11 @@ def multiple(a, b):
     42
     """
     "*** YOUR CODE HERE ***"
-
+    c=min(a,b)
+    d=max(a,b)
+    while c%d!=0:
+        c+=min(a,b)
+    return c
 
 
 def cycle(f1, f2, f3):
@@ -101,4 +115,45 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
-
+    def g(n):
+        def h(x):
+            i = 0
+            while i < n:
+                if i % 3 == 0:
+                    x = f1(x)
+                elif i % 3 == 1:
+                    x = f2(x)
+                else:
+                    x = f3(x)
+                i += 1
+            return x
+        return h
+    return g
+    # def g(n):
+    #     def h(x):
+    #         if n == 0:
+    #             return x
+    #         return cycle(f2, f3, f1)(n - 1)(f1(x))
+    #     return h
+    # return g
+    #---------------------------------------------
+    # def g(n):
+    #     def h(x):
+    #         b=n
+    #         while b:
+    #             if b<=3:
+    #                 if b==1:
+    #                     x=f1(x)
+    #                     b-=1
+    #                 if b==1:
+    #                     x=f2(x)
+    #                     b-=1
+    #                 if b==1:
+    #                     x=f3(x)
+    #                     b-=1
+    #             if b>3:
+    #                 x=g(b-3)(x)
+    #                 b-=3
+    #         return x
+    #     return h
+    # return g    #我错的有些逻辑混乱
