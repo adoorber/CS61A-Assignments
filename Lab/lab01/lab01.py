@@ -8,7 +8,8 @@ def digit(n, k):
     >>> digit(3579, 10)
     0
     """
-    return (n // (10 ** k)) % 10
+    return n // pow(10, k) % 10
+#   return (n // (10 ** k)) % 10
 
 
 def middle(a, b, c):
@@ -42,15 +43,6 @@ def falling(n, k):
     1
     """
     "*** YOUR CODE HERE ***"
-    # a=n    
-    # b=n-1
-    # if k==0 :
-    #     return 1
-    # while k-1:
-    #     a=a*b
-    #     b=b-1
-    #     k=k-1
-    # return a
     result = 1
     for _ in range(k):  # 循环k次
         result *= n     # 乘以当前的n
@@ -79,17 +71,18 @@ def divisible_by_k(n, k):
     0
     """
     "*** YOUR CODE HERE ***"
-    # a=k
-    # count = 0
-    # while a <= n:  # 修改循环条件：使用<=确保n被包含
-    #     print(a)
-    #     count += 1
-    #     a += k
-    # return count
-    count = n // k  # 计算范围内k的倍数的个数
-    for num in range(k, k * (count + 1), k):  # 直接生成所有符合条件的数
-        print(num)
+    count = 0
+    i = 1
+    while i <= n:
+        if i % k == 0:
+            print(i)
+            count += 1
+        i += 1
     return count
+    # count = n // k  # 计算范围内k的倍数的个数
+    # for num in range(k, k * (count + 1), k):  # 直接生成所有符合条件的数
+    #     print(num)
+    # return count
 
 
 def sum_digits(y):
