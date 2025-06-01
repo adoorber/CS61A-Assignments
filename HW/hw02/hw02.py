@@ -8,9 +8,7 @@ triple = lambda x: 3 * x
 
 increment = lambda x: x + 1
 
-
 HW_SOURCE_FILE=__file__
-
 
 def product(n, term):
     """Return the product of the first n terms in a sequence.
@@ -32,7 +30,11 @@ def product(n, term):
     162
     """
     "*** YOUR CODE HERE ***"
-
+    prod=1
+    while n>0 :
+        prod*=term(n)
+        n-=1
+    return prod
 
 def accumulate(fuse, start, n, term):
     """Return the result of fusing together the first n terms in a sequence 
@@ -54,7 +56,16 @@ def accumulate(fuse, start, n, term):
     19
     """
     "*** YOUR CODE HERE ***"
-
+    # prod=term(n)
+    # while n>1 :
+    #     prod=fuse(prod,term(n-1))
+    #     n-=1
+    # prod=fuse(start,prod)
+    # return prod
+    total, k = start, n    #没有了n=0的时候的问题，熟练运用了原来的数学原理
+    while k >= 1:
+        total, k = fuse(total, term(k)), k - 1
+    return total
 
 def summation_using_accumulate(n, term):
     """Returns the sum: term(1) + ... + term(n), using accumulate.
@@ -68,8 +79,7 @@ def summation_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-    return ____
-
+    return accumulate(add, 0, n, term)
 
 def product_using_accumulate(n, term):
     """Returns the product: term(1) * ... * term(n), using accumulate.
@@ -83,8 +93,7 @@ def product_using_accumulate(n, term):
     >>> [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]
     ['Expr', 'Return']
     """
-    return ____
-
+    return accumulate(mul, 1, n, term)
 
 def make_repeater(f, n):
     """Returns the function that computes the nth application of f.
@@ -100,4 +109,11 @@ def make_repeater(f, n):
     390625
     """
     "*** YOUR CODE HERE ***"
+    def repeater(x):
+        k=n
+        while k>0:
+            x=f(x)
+            k-=1
+        return x
+    return repeater
 

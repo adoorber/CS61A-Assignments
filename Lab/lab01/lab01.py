@@ -8,8 +8,9 @@ def digit(n, k):
     >>> digit(3579, 10)
     0
     """
+    #return (n // (10 ** k)) % 10
     return n // pow(10, k) % 10
-#   return (n // (10 ** k)) % 10
+
 
 
 def middle(a, b, c):
