@@ -13,9 +13,11 @@ def a_plus_abs_b(a, b):
     3
     """
     if b < 0:
-        f = lambda x, y: x - y  
+        #f = lambda x, y: x - y
+        f=sub  
     else:
-        f = lambda x, y: x + y  
+        f=add
+        #f = lambda x, y: x + y  
     return f(a, b)  # 正确调用函数，这里返回的是函数，需要注意，所以用lambda
 
 def a_plus_abs_b_syntax_check():
@@ -66,32 +68,20 @@ def largest_factor(n):
     1
     """
     "*** YOUR CODE HERE ***"
-    # a=1
-    # c=n
-    # while a*a<=c :
-    #     if c%a==0:
-    #         b=a
-    # return b
+    factor = n - 1
+    while factor > 0:
+        if n % factor == 0:
+            return factor
+        factor -= 1
 
-    # if n <= 1:
-    #     return n  # 处理特殊情况
-    
-    # largest = 1
-    # for i in range(2, int(n ** 0.5) + 1):
-    #     if n % i == 0:
-    #         # 同时检查因子i和对应的商n//i
-    #         largest = max(largest, i, n // i)
-    
-    # return largest if largest != n else 1  # 若n是质数，返回1
-
-    a=n-1
-    if a==0 :
-        a=1
-    while a!=1:
-        if n%a==0:
-            return a   #这里两种方法都是正确的
-        else: a=a-1
-    return a
+    # a=n-1
+    # if a==0 :
+    #     a=1
+    # while a!=1:
+    #     if n%a==0:
+    #         return a   #这里两种方法都是正确的
+    #     else: a=a-1
+    # return a
 
 def hailstone(n):
     """Print the hailstone sequence starting at n and return its
