@@ -1,3 +1,5 @@
+#就是讲简单的函数
+
 def digit(n, k):
     """Return the digit that is k from the right of n for positive integers n and k.
 
