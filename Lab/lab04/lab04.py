@@ -29,15 +29,15 @@ def buy(fruits_to_buy, prices, total_amount):
     """
     def add(fruits, amount, cart):
         if fruits == [] and amount == 0:
-            print(cart)
+            print(cart)                             #因为display返回的是字符变量，所以不会报错
         elif fruits and amount > 0:
             fruit = fruits[0]
-            price = ____
-            for k in ____:
+            price = prices[fruit]
+            for k in range(1,amount//price+1):  #这里要加一，因为区间是左闭右开的
                 # Hint: The display function will help you add fruit to the cart.
-                add(____, ____, ____)
-    add(fruits_to_buy, total_amount, '')
+                add(fruits[1:], amount-k*price, cart+display(fruit,k))
 
+    add(fruits_to_buy, total_amount, '')
 
 def display(fruit, count):
     """Display a count of a fruit in square brackets.
@@ -70,6 +70,7 @@ def distance(city_a, city_b):
     5.0
     """
     "*** YOUR CODE HERE ***"
+    return sqrt( (get_lat(city_a)-get_lat(city_b))**2 + (get_lon(city_a)-get_lon(city_b))**2)
 
 def closer_city(lat, lon, city_a, city_b):
     """
@@ -87,6 +88,12 @@ def closer_city(lat, lon, city_a, city_b):
     'Bucharest'
     """
     "*** YOUR CODE HERE ***"
+    new_city = make_city('tmp', lat, lon)
+    dist1 = distance(city_a, new_city)
+    dist2 = distance(city_b, new_city)
+    if dist1 < dist2:
+         return get_name(city_a)
+    return get_name(city_b)
 
 def check_city_abstraction():
     """
