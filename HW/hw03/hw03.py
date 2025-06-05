@@ -1,3 +1,5 @@
+#迭代和树迭代
+
 HW_SOURCE_FILE = __file__
 
 
@@ -25,7 +27,19 @@ def num_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    if n%10 ==8 :
+        return 1 + num_eights(n//10)
+    elif n==0 :
+        return 0
+    else :
+        return num_eights(n//10)
+    
+    # if n % 10 == 8:
+    #     return 1 + num_eights(n // 10)
+    # elif n < 10:
+    #     return 0
+    # else:
+    #     return num_eights(n // 10)    #这道题没有考虑负数情况
 
 def digit_distance(n):
     """Determines the digit distance of n.
@@ -47,6 +61,10 @@ def digit_distance(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    if n<10 :
+        return 0
+    else :
+        return abs(n%10-n%100//10) + digit_distance(n//10)
 
 
 def interleaved_sum(n, odd_func, even_func):
@@ -71,7 +89,14 @@ def interleaved_sum(n, odd_func, even_func):
     True
     """
     "*** YOUR CODE HERE ***"
-
+    def helper(k):
+        if k==n :
+            return odd_func(k)
+        if k>=n :
+            return 0
+        return odd_func(k)+even_func(k+1)+helper(k+2)
+    return helper(1)
+        
 
 def next_smaller_dollar(bill):
     """Returns the next smaller bill in order."""
@@ -107,6 +132,21 @@ def count_dollars(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    # bill=100
+    # return 1+count_dollars(total-k*bill)
+    def constrained_count(bill,money):
+        if money==0 :
+            return 1
+        elif money<0 :
+            return 0
+        elif bill==1 :
+            return 1
+        # elif bill==None :      ###这里也可以这样写，替代前两行
+        #     return 0
+        else :
+            return constrained_count(bill, money-bill) + constrained_count(next_smaller_dollar(bill),money)
+    return constrained_count(100,total)
+
 
 
 def next_larger_dollar(bill):
@@ -143,6 +183,16 @@ def count_dollars_upward(total):
     True
     """
     "*** YOUR CODE HERE ***"
+    def constrained_count(bill,money):
+        if money==0 :
+            return 1
+        elif money<0 :
+            return 0
+        elif bill==None :      
+            return 0
+        else :
+            return constrained_count(bill, money-bill) + constrained_count(next_larger_dollar(bill),money)
+    return constrained_count(1,total)
 
 
 def print_move(origin, destination):
@@ -178,6 +228,13 @@ def move_stack(n, start, end):
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
+    tmp=6-start-end
+    if n==1 :
+        print_move(start,end)
+    else :
+        move_stack(n-1,start,tmp)
+        move_stack(1,start,end)
+        move_stack(n-1,tmp,end)
 
 
 from operator import sub, mul
@@ -193,5 +250,7 @@ def make_anonymous_factorial():
     ...     ['Assign', 'AnnAssign', 'AugAssign', 'NamedExpr', 'FunctionDef', 'Recursion'])
     True
     """
-    return 'YOUR_EXPRESSION_HERE'
+    #return 'YOUR_EXPRESSION_HERE'
+    return (lambda f: lambda k: f(f, k))   (lambda f, k: k   if k == 1 else mul(  k, f(  f, sub(k, 1)   )   )        )
 
+#-----------------------------------------最后一问先放弃了，难，又没用-----------------------------------------------------------
